@@ -1,60 +1,77 @@
-import React, { useState, useEffect } from "react";
-// import { useNavigate } from 'react-router';
-import Player from "./Player";
+import React from "react";
+import { useNavigate } from "react-router";
+import moment from "moment";
+import { AiFillHome } from "react-icons/ai";
 
-export default function PlayerDetails() {
-  const [tracksData, setTracksData] = useState(null);
+const styles = {
+  button: {
+    width: 115,
+    height: 25,
+    background: "white",
+    padding: 5,
+    margin: 5,
+    border: 5,
+    borderRadius: 20,
+    fontWeight: "bold",
+  },
+};
 
-  useEffect(() => {
-    fetch("https://itunes.apple.com/search?term=rock&country=GB&entity=song")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTracksData(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-  //   explain more about dependencies array/ error handling.
-  // function Redirect() {
-  //   let navigate = useNavigate();
-  //   function handleClick() {
-  //     navigate('/home')
-  //   }
+export default function PlayerDetails(props) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
+  const { singleTrack } = props;
 
   return (
     <div>
       <h1>Rock Tracks</h1>
-      {tracksData ? (
+      {singleTrack ? (
         <>
           <ul>
-            {tracksData.results.map((track, index) => {
-              return (
-                <div key={index}>
-                  <li>
-                    <img src={track.artworkUrl60} alt="album cover" />
-                  </li>
-                  <li>Track {index + 1}</li>
-                  <li>Track Name: {track.trackName} </li>
-                  <li>Artist Name: {track.artistName} </li>
-                  <li>
-                    Price: {track.currency} {track.trackPrice}{" "}
-                  </li>
-                  <li>
-                    Duration: {track.currency} {track.duration}{" "}
-                  </li>
-                  <li>
-                    Release Date: {track.currency} {track.releaseDate}{" "}
-                  </li>
-                  {/* <button onClick={handleClick}>go home</button> */}
-                </div>
-              );
-            })}
+            <div
+              key={singleTrack.trackId}
+              style={{ margin: 10, padding: 10, listStyleType: "none" }}
+            >
+              <li>
+                <img src={singleTrack.artworkUrl100} alt="album cover" />
+              </li>
+              <li>
+                <strong>Track name : </strong> {singleTrack.trackName}
+              </li>
+              <li>
+                <strong>Artist name : </strong>
+                {singleTrack.artistName}{" "}
+              </li>
+              <li>
+                <strong>Price : </strong>
+                {singleTrack.currency} {singleTrack.trackPrice}{" "}
+              </li>
+              <li>
+                <strong>Track length : </strong>
+                {moment(singleTrack.trackTimeMillis).format("m:ss")}
+              </li>
+              <li>
+                <strong>Release date : </strong>
+                {moment(singleTrack.releaseDate).format("DD-MM-YYYY")}
+              </li>
+              <a
+                href={singleTrack.trackViewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View track
+              </a>
+              <button onClick={handleClick} style={styles.button}>
+                {" "}
+                Go to <AiFillHome />
+              </button>
+            </div>
           </ul>
         </>
       ) : (
-        <span> Loading....</span>
+        <span>Loading SINGLE rock track</span>
       )}
     </div>
   );
 }
-// }

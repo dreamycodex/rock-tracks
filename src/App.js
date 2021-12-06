@@ -1,28 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-// import Switch from "react-switch";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Player from "./Components/Player";
 import PlayerDetails from "./Components/PlayerDetails";
 
 export default function App() {
+  const [singleTrack, setSingleTrack] = useState({});
+
   return (
     <>
       <BrowserRouter>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/details">Details</Link>
-              </li>
-            </ul>
-          </nav>
           <Routes>
-          <Route path="/" element={<Player />} />
-          <Route path="/details/:id" element={<PlayerDetails />} />
+            <Route
+              path="/"
+              element={<Player setSingleTrack={setSingleTrack} />}
+            />
+            <Route
+              path="/details/:id"
+              element={<PlayerDetails singleTrack={singleTrack} />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
