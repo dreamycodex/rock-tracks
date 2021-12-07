@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# Rock Tracks React web application
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Description
+
+This React application connects to an Apple REST web service and returns a list of rock tracks. 
+
+## CORS issue
+If you encounter CORS issue, you may install and use a browser plugin called **Moesif Origin & CORS Changer**. 
+
+This plugin allows you to send cross-domain requests. You can also override Request Origin and CORS headers.
+This plugin allows you to send cross-domain requests directly from browser without receiving Cross Origin Errors. 
+You can override the Request Origin header with this plugin and also have Access-Control-Allow-Origin set to *.
+
+For Mozilla Firefox:
+
+[https://addons.mozilla.org/en-GB/firefox/addon/moesif-origin-cors-changer1/](https://addons.mozilla.org/en-GB/firefox/addon/moesif-origin-cors-changer1/)
+
+For Google Chrome: 
+
+[https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
 
 ## Available Scripts
 
